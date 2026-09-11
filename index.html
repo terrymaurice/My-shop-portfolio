@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terry Maurice | Developer Portfolio</title>
+    <title>Terry Maurice | Software Engineer & Full-Stack Developer</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-main: #0a0f1d;
-            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-main: #070a13;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
             --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.4);
             --accent-hover: #4f46e5;
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --border: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(99, 102, 241, 0.3);
         }
 
         * {
@@ -25,10 +28,13 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        body {
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
             background-color: var(--bg-main) !important;
             color: var(--text-primary) !important;
             line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
         /* Header / Navbar */
@@ -36,9 +42,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 8%;
-            background: rgba(10, 15, 29, 0.95);
-            backdrop-filter: blur(10px);
+            padding: 1.2rem 8%;
+            background: rgba(7, 10, 19, 0.85);
+            backdrop-filter: blur(12px);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -46,10 +52,11 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--text-primary);
             text-decoration: none;
+            letter-spacing: -0.5px;
         }
 
         .logo span { color: var(--accent); }
@@ -63,7 +70,9 @@
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            transition: 0.3s;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
         .nav-links a:hover { color: var(--text-primary); }
@@ -73,20 +82,41 @@
             background: var(--accent);
             color: #fff !important;
             border-radius: 6px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            transition: all 0.3s ease;
         }
 
-        /* Hero Section */
+        .btn-nav:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Mobile Hamburger Icon */
+        .mobile-toggle {
+            display: none;
+            font-size: 1.6rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            background: none;
+            border: none;
+            outline: none;
+        }
+
+        /* Hero Section (100vh Viewport Height) */
         .hero {
-            min-height: 70vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 4rem 8%;
-            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            padding: 2rem 8%;
+            background: radial-gradient(circle at 50% 30%, rgba(99, 102, 241, 0.18) 0%, rgba(7, 10, 19, 0) 70%);
         }
 
-        .hero-content { max-width: 750px; }
+        .hero-content { 
+            max-width: 800px; 
+            width: 100%;
+        }
 
         .profile-img {
             width: 130px;
@@ -95,31 +125,53 @@
             border: 3px solid var(--accent);
             object-fit: cover;
             margin-bottom: 1.2rem;
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
+            box-shadow: 0 0 30px var(--accent-glow);
         }
 
         .badge {
-            background: rgba(99, 102, 241, 0.15);
-            color: var(--accent);
-            padding: 0.4rem 1rem;
+            background: rgba(99, 102, 241, 0.12);
+            color: #818cf8;
+            padding: 0.4rem 1.2rem;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            display: inline-block;
+            border: 1px solid var(--border-highlight);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22c55e;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.2rem;
             margin: 1.2rem 0 1rem;
             line-height: 1.2;
             color: #ffffff;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
+
+        .hero h1 span {
+    background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
         .hero p {
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             margin-bottom: 2rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-btns {
@@ -130,41 +182,62 @@
 
         /* Buttons */
         .btn {
-            padding: 0.8rem 1.8rem;
+            padding: 0.85rem 1.8rem;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             display: inline-block;
             border: none;
             cursor: pointer;
+            font-size: 0.95rem;
         }
 
-        .btn-primary {
-            background: var(--accent);
+        .btn-primary { 
+            background: var(--accent); 
             color: #fff;
+            box-shadow: 0 4px 20px var(--accent-glow);
         }
-
-        .btn-primary:hover { background: var(--accent-hover); }
+        
+        .btn-primary:hover { 
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
 
         .btn-secondary {
-            background: transparent;
+            background: var(--bg-card);
             color: var(--text-primary);
             border: 1px solid var(--border);
         }
+        
+        .btn-secondary:hover { 
+            background: var(--bg-card-hover);
+            border-color: var(--text-secondary);
+            transform: translateY(-2px);
+        }
 
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
+        /* Sections Structure */
+        .section { padding: 6rem 8%; }
 
-        /* Sections */
-        .section {
-            padding: 5rem 8%;
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+            display: block;
         }
 
         .section-title {
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 3rem;
+            font-size: 2.2rem;
             color: #ffffff;
+            font-weight: 700;
         }
 
         .grid-container {
@@ -173,55 +246,114 @@
             gap: 2rem;
         }
 
-        /* Modern UI Feature Cards (No Ugly Pictures) */
+        /* Project Mockup Cards */
         .project-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .project-card:hover {
             transform: translateY(-6px);
-            border-color: var(--accent);
+            border-color: var(--border-highlight);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
         }
 
         .mockup-header {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
             padding: 0.8rem 1.2rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: space-between;
             border-bottom: 1px solid var(--border);
         }
 
-        .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+        .mockup-dots {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+        }
+
+        .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
         .dot-red { background: #ff5f56; }
         .dot-yellow { background: #ffbd2e; }
         .dot-green { background: #27c93f; }
-        .mockup-title { font-size: 0.8rem; color: var(--text-secondary); margin-left: 0.5rem; }
+
+        .mockup-url { 
+            font-size: 0.78rem; 
+            color: var(--text-secondary); 
+            font-family: 'Courier New', monospace;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.8rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Clean App Visual Preview Box */
+        .mockup-preview {
+            background: linear-gradient(135deg, #0b1120 0%, #050811 100%);
+            padding: 1.8rem 1.2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 110px;
+        }
+
+        .app-preview-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+        }
+
+        .app-badge {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #818cf8;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .app-status {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
 
         .project-body {
-            padding: 2rem;
+            padding: 1.8rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
 
-        .project-body h3 {
-            font-size: 1.3rem;
-            color: #fff;
-            margin-bottom: 0.8rem;
+        .project-body h3 { 
+            font-size: 1.3rem; 
+            color: #fff; 
+            margin-bottom: 0.8rem; 
         }
 
-        .project-body p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
+        .project-body p { 
+            color: var(--text-secondary); 
+            font-size: 0.95rem; 
+            margin-bottom: 1.5rem; 
+            flex-grow: 1; 
         }
 
         .tech-tags {
@@ -232,51 +364,94 @@
         }
 
         .tag {
-            background: rgba(255, 255, 255, 0.06);
-            color: #cbd5e1;
+            background: rgba(99, 102, 241, 0.08);
+            color: #a5b4fc;
             font-size: 0.75rem;
             padding: 0.3rem 0.8rem;
             border-radius: 4px;
-            border: 1px solid var(--border);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            font-weight: 600;
         }
 
-        /* Generic Skill Cards */
-        .card {
+        /* Services & Capability Cards */
+        .service-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            padding: 2rem;
-            border-radius: 12px;
-            transition: transform 0.3s ease;
+            padding: 2.2rem;
+            border-radius: 14px;
+            transition: all 0.3s ease;
         }
 
-        .card:hover { transform: translateY(-5px); }
+        .service-card:hover { 
+            transform: translateY(-5px);
+            background: var(--bg-card-hover);
+            border-color: var(--border-highlight);
+        }
 
-        .card-icon {
-            font-size: 2.5rem;
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--border-highlight);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
             color: var(--accent);
             margin-bottom: 1.2rem;
         }
 
-        .card h3 { margin-bottom: 0.8rem; color: #fff; }
-        .card p { color: var(--text-secondary); font-size: 0.95rem; }
+        .service-card h3 { 
+            margin-bottom: 0.8rem; 
+            color: #fff; 
+            font-size: 1.2rem;
+        }
 
-        /* Contact Form */
+        .service-card p { 
+            color: var(--text-secondary); 
+            font-size: 0.95rem; 
+        }
+
+        /* Contact Section */
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            padding: 3rem;
+            padding: 3.5rem;
             border-radius: 16px;
         }
 
-        .contact-info .info-item {
+        .contact-info h2 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            color: var(--text-secondary);
+            gap: 1.2rem;
+            margin-top: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        .info-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
         }
 
         .contact-form {
@@ -291,25 +466,23 @@
             gap: 0.4rem;
         }
 
-        .form-group label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
+        .form-group label { font-size: 0.9rem; color: var(--text-secondary); }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 0.8rem 1rem;
+            padding: 0.85rem 1rem;
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border);
             border-radius: 8px;
             color: #fff;
             outline: none;
+            transition: border-color 0.3s ease;
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--accent);
+        .form-group textarea:focus { 
+            border-color: var(--accent); 
         }
 
         .btn-full { width: 100%; }
@@ -317,17 +490,52 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem;
             border-top: 1px solid var(--border);
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
-        /* Mobile Responsiveness */
+        /* Mobile Viewport Responsiveness (Pixel 7 / Phone View) */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 2.2rem; }
-            .contact-container { grid-template-columns: 1fr; }
+            .navbar { padding: 1rem 5%; }
+
+            .mobile-toggle { display: block; }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #0b1021;
+                padding: 1.5rem 0;
+                gap: 1.2rem;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            }
+
+            .nav-links.active { display: flex; }
+
+            .hero {
+                min-height: 100vh;
+                padding: 5rem 5% 3rem 5%;
+            }
+
+            .hero h1 { font-size: 2.3rem; line-height: 1.25; }
+            .hero p { font-size: 1rem; }
+
+            .hero-btns {
+                flex-direction: column;
+                gap: 0.8rem;
+                width: 100%;
+            }
+
+            .hero-btns .btn { width: 100%; }
+            .grid-container { grid-template-columns: 1fr; }
+            .contact-container { grid-template-columns: 1fr; padding: 1.8rem; }
+            .section { padding: 4rem 5%; }
         }
     </style>
 </head>
@@ -335,9 +543,16 @@
 
     <!-- Header / Navbar -->
     <header class="navbar">
-        <a href="#" class="logo">Terry <span>Maurice</span></a>
-        <nav class="nav-links">
+        <a href="#" class="logo">Terry<span> Maurice</span></a>
+        
+        <!-- Mobile Toggle Button -->
+        <button class="mobile-toggle" id="menuToggle" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav class="nav-links" id="navLinks">
             <a href="#about">About</a>
+            <a href="#services">Services</a>
             <a href="#projects">Projects</a>
             <a href="#skills">Skills</a>
             <a href="#contact" class="btn-nav">Contact Me</a>
@@ -345,35 +560,86 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero" id="about">
         <div class="hero-content">
             <img src="terry.jpeg.jpeg" alt="Terry Maurice" class="profile-img">
-            <div><span class="badge">Available for Work</span></div>
-            <h1>Crafting Scalable Web Experiences</h1>
-            <p>Full-Stack Web Developer specialized in building modern web applications, PHP/MySQL backends, and responsive user interfaces.</p>
+            <div>
+                <span class="badge">
+                    <span class="badge-dot"></span> Available for Web Projects
+                </span>
+            </div>
+            <h1>Crafting <span>Engineered</span> Web Experiences</h1>
+            <p>Software Engineer specialized in building full-stack applications, robust PHP & MySQL backend systems, and responsive modern user interfaces.</p>
             <div class="hero-btns">
-                <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                <a href="#projects" class="btn btn-secondary">View Work</a>
+                <a href="#contact" class="btn btn-primary">Start a Project</a>
+                <a href="#projects" class="btn btn-secondary">Explore Work</a>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section (Professional UI Mockups) -->
-    <section class="section" id="projects">
-        <h2 class="section-title">Featured Applications</h2>
+    <!-- What I Offer (Services Section) -->
+    <section class="section" id="services">
+        <div class="section-header">
+            <span class="section-subtitle">What I Deliver</span>
+            <h2 class="section-title">Software Engineering Services</h2>
+        </div>
         <div class="grid-container">
             
-            <!-- Application 1: CRUD Shop -->
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+                <h3>Full-Stack Web Development</h3>
+                <p>Custom web applications built from scratch using clean PHP backends, SQL databases, and responsive HTML5/CSS3 interfaces.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-database"></i></div>
+                <h3>Database Design & Architecture</h3>
+                <p>Relational database structures, optimized SQL queries, secure data validation, and automated administrative operations.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h3>Admin Dashboards & Portals</h3>
+                <p>Tailored management systems to track messages, clients, product inventories, and operational data securely.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <h3>Responsive UI/UX Optimization</h3>
+                <p>Mobile-first desktop and phone design adaptations ensuring lightning-fast loading speeds across all device sizes.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Projects Showcase Section -->
+    <section class="section" id="projects">
+        <div class="section-header">
+            <span class="section-subtitle">Portfolio Showcase</span>
+            <h2 class="section-title">Featured Applications</h2>
+        </div>
+        <div class="grid-container">
+            
+            <!-- Project 1: CRUD Shop -->
             <div class="project-card">
                 <div class="mockup-header">
-                    <span class="dot dot-red"></span>
-                    <span class="dot dot-yellow"></span>
-                    <span class="dot dot-green"></span>
-                    <span class="mockup-title">localhost/myshop/index.php</span>
+                    <div class="mockup-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+                    <span class="mockup-url">myshop/index.php</span>
+                </div>
+                <!-- Clean UI Interface Preview -->
+                <div class="mockup-preview">
+                    <div class="app-preview-box">
+                        <div class="app-badge"><i class="fa-solid fa-users"></i> Client Records Active</div>
+                        <div class="app-status"><i class="fa-solid fa-database"></i> SQL Connected</div>
+                    </div>
                 </div>
                 <div class="project-body">
                     <h3>CRUD Client Management System</h3>
-                    <p>Dynamic database application enabling full create, read, update, and delete operations for client records with SQL integration.</p>
+                    <p>High-performance backend application allowing administrators to create, update, search, and delete client data with real-time database execution.</p>
                     <div class="tech-tags">
                         <span class="tag">PHP 8</span>
                         <span class="tag">MySQL</span>
@@ -383,17 +649,28 @@
                 </div>
             </div>
 
-            <!-- Application 2: Admin Message Center -->
+            <!-- Project 2: Admin Dashboard -->
             <div class="project-card">
                 <div class="mockup-header">
-                    <span class="dot dot-red"></span>
-                    <span class="dot dot-yellow"></span>
-                    <span class="dot dot-green"></span>
-                    <span class="mockup-title">localhost/myshop/admin_messages.php</span>
+                    <div class="mockup-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+                    <span class="mockup-url">myshop/admin_messages.php</span>
+                </div>
+                <!-- Clean UI Interface Preview -->
+                <div class="mockup-preview">
+                    <div class="app-preview-box">
+                        <div class="app-badge" style="color: #c084fc; border-color: rgba(192, 132, 252, 0.3); background: rgba(192, 132, 252, 0.1);">
+                            <i class="fa-solid fa-envelope"></i> Inbox Active
+                        </div>
+                        <div class="app-status"><i class="fa-solid fa-shield-halved"></i> Admin Secure</div>
+                    </div>
                 </div>
                 <div class="project-body">
                     <h3>Admin Message Dashboard</h3>
-                    <p>Secure administrative viewer designed to organize, view, and process client contact queries submitted directly from the frontend.</p>
+                    <p>Secure web dashboard designed to capture, organize, and view client inquiry submissions sent directly from the portfolio frontend.</p>
                     <div class="tech-tags">
                         <span class="tag">PHP</span>
                         <span class="tag">MySQL</span>
@@ -406,24 +683,27 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Technical Skills Section -->
     <section class="section" id="skills">
-        <h2 class="section-title">Core Expertise</h2>
+        <div class="section-header">
+            <span class="section-subtitle">Core Capabilities</span>
+            <h2 class="section-title">Technical Expertise</h2>
+        </div>
         <div class="grid-container">
-            <div class="card">
-                <i class="fa-brands fa-php card-icon"></i>
+            <div class="service-card">
+                <i class="fa-brands fa-php service-icon"></i>
                 <h3>Backend Engineering</h3>
-                <p>PHP, MySQL database design, CRUD operations, and safe API integration.</p>
+                <p>PHP application logic, session control, SQL database relations, and secure data handling.</p>
             </div>
-            <div class="card">
-                <i class="fa-brands fa-html5 card-icon"></i>
+            <div class="service-card">
+                <i class="fa-brands fa-html5 service-icon"></i>
                 <h3>Frontend Development</h3>
-                <p>Modern HTML5, CSS3, JavaScript, Flexbox/Grid, and fully responsive layouts.</p>
+                <p>HTML5 architecture, CSS3 Grid/Flexbox layouts, dark theme glassmorphism, and client-side interactions.</p>
             </div>
-            <div class="card">
-                <i class="fa-brands fa-git-alt card-icon"></i>
-                <h3>Version Control & Deployment</h3>
-                <p>Git workflow, GitHub repository management, and local XAMPP environment setups.</p>
+            <div class="service-card">
+                <i class="fa-brands fa-git-alt service-icon"></i>
+                <h3>Version Control & Workflow</h3>
+                <p>Git source control, GitHub code repository deployment, and local server setups in XAMPP environments.</p>
             </div>
         </div>
     </section>
@@ -432,20 +712,34 @@
     <section class="section" id="contact">
         <div class="contact-container">
             <div class="contact-info">
-                <h2 class="section-title" style="text-align: left;">Let's Work Together</h2>
-                <p>Send me a message for collaborations, project inquiries, or backend development work.</p>
-                <div class="info-item"><i class="fa-solid fa-envelope"></i> terry@example.com</div>
-                <div class="info-item"><i class="fa-solid fa-location-dot"></i> Available Worldwide</div>
+                <h2>Let's Build Something Together</h2>
+                <p>Have a project in mind or need custom software development work? Send a message and let's get in touch.</p>
+                
+                <div class="info-item">
+                    <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div>
+                        <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">Email Address</span>
+                        <strong>terry@example.com</strong>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div>
+                        <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">Location</span>
+                        <strong>Available Worldwide (Remote)</strong>
+                    </div>
+                </div>
             </div>
 
             <form action="contact.php" method="POST" class="contact-form">
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    <input type="text" id="name" name="name" placeholder="Jane Doe" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                    <input type="email" id="email" name="email" placeholder="jane@example.com" required>
                 </div>
                 <div class="form-group">
                     <label for="subject">Subject</label>
@@ -453,7 +747,7 @@
                 </div>
                 <div class="form-group">
                     <label for="message">Your Message</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+                    <textarea id="message" name="message" rows="5" placeholder="Details about your software or web development needs..." required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary btn-full">Send Message</button>
             </form>
@@ -464,5 +758,20 @@
         <p>&copy; 2026 Terry Maurice. All Rights Reserved.</p>
     </footer>
 
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
