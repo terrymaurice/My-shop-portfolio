@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 09, 2026 at 03:35 PM
+-- Generation Time: Sep 11, 2026 at 08:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -48,6 +48,29 @@ INSERT INTO `clients` (`id`, `name`, `email`, `phone`, `address`, `created_at`) 
 (5, 'Cristiano Ronaldo', 'cristiano.ronaldo@gmail.com', '+32447788993', 'Manchester, England', '2026-08-31 20:12:19'),
 (6, 'Boris Johnson', 'boris.johnson@gmail.com', '+4499778855', 'London, England', '2026-08-31 20:12:19');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `subject` varchar(200) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `name`, `email`, `subject`, `message`, `created_at`) VALUES
+(1, 'Terry Maurice', 'terrymaurice622@gmail.com', '', 'i love you mozy', '2026-09-11 19:31:04'),
+(2, 'Terry Maurice', 'terrymaurice622@gmail.com', '', 'mozy\r\n', '2026-09-11 19:36:44');
+
 --
 -- Indexes for dumped tables
 --
@@ -60,6 +83,12 @@ ALTER TABLE `clients`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -68,6 +97,12 @@ ALTER TABLE `clients`
 --
 ALTER TABLE `clients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
